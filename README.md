@@ -41,3 +41,12 @@ Onde: <br>
     **"EMAIL_ADDRESS"** são os emails que receberão a notificação das Tags faltantes;<br>
     **"EMAIL_SENDER"** é o remetente das mesnsagens de email;<br>
     **"TAGS_TO_CHECK"** é a lista de Tags que serão checadas.<br>
+
+Modelo do email recebido:
+
+ O Bucket esta sem a(s) Tag(s) necessárias:
+ 
+ TAG: produto
+ Conta AWS: 12345678900
+ Bucket Name: my-bucket
+ Usuario criador: fulano@domain.com
