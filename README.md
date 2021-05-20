@@ -43,10 +43,11 @@ Onde: <br>
     **"TAGS_TO_CHECK"** é a lista de Tags que serão checadas.<br>
 
 Modelo do email recebido:
+```
+O Bucket esta sem a(s) Tag(s) necessárias:
 
- O Bucket esta sem a(s) Tag(s) necessárias:
- 
- TAG: produto
- Conta AWS: 12345678900
- Bucket Name: my-bucket
- Usuario criador: fulano@domain.com
+TAG: produto
+Conta AWS: 12345678900
+Bucket Name: my-bucket
+Usuario criador: fulano@domain.com
+```
