@@ -32,8 +32,8 @@ aws cloudformation create-stack --stack-name auto-tag-resources --template-body 
 5 - Na função Lambda **"auto-tag-resources-notify"** configurar as variaves de ambiente conforme o modelo abaixo:
 
 ```
-EMAIL_ADDRESS	["user1@email.com","user2@email.com","user3@email.com"]
-EMAIL_SENDER	tags_notify@email.com
+EMAIL_ADDRESS	["user_or_group@domain.com"]
+EMAIL_SENDER	tags_notify@domain.com
 TAGS_TO_CHECK	["squad","tribo","produto"]
 ```
 
