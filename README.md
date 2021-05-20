@@ -1,8 +1,8 @@
 # Introdução
 -----
 
-Esta solução visa auto taggear recursos e notificar sobre recursos não taggeados corretamente. Todo novo recurso criado é registrado no CloudTrail, que gera um evento no formato JSON com as informações do recurso criado, o CloudWatch EventBridge recebe este JSON e aciona 2 funções Lambdas, uma delas cria uma Tag automatica no recurso com o nome do usuário criador, a outra função checa se o recurso criado recebeu as Tags squad, tribo e produto, e em caso negativo envia uma notificação através do SES para a equipe de Cloud informando as Tags faltantes.
-
+Esta solução visa auto taggear recursos com e notificar sobre recursos não taggeados corretamente. Todo novo recurso criado é registrado no CloudTrail, que gera um evento no formato JSON com as informações do recurso criado, o CloudWatch EventBridge recebe este JSON e aciona 2 funções Lambdas, uma delas cria uma Tag automatica no recurso com o nome do usuário criador, a outra função checa se o recurso criado recebeu as Tags devidas e em caso negativo envia uma notificação através do SES para o email configurado informando as Tags faltantes.
+Obs. Solução funciona apenas para Instancia EC2, Bucket S3 e Instancia RDS.
 
 ![Auto TAG Notify](./autotag.png)
 
@@ -13,7 +13,8 @@ A solução deve ser criada em cada região que deverá ser monitorada.
 ### Pré Requisitos
 1 - Cloud Trail configurado em cada uma das regiões que receberão a solução;
 
-2 - SES autorizado a enviar email pelo dominio localiza.com apenas na região us-east-1; (As outras regioes conseguem usar o SES em us-east-1)
+2 - SES autorizado a enviar email pelo dominio que enviará o email.
+É necessário configurar o SES apenas em uma região; (As outras regioes conseguem usar o SES em outras regiões)
 
 ### Deploy utilizando cloudformation
 
@@ -31,8 +32,8 @@ aws cloudformation create-stack --stack-name auto-tag-resources --template-body 
 5 - Na função Lambda **"auto-tag-resources-notify"** configurar as variaves de ambiente conforme o modelo abaixo:
 
 ```
-EMAIL_ADDRESS	["user1@localiza.com","user2@localiza.com","user3@localiza.com"]
-EMAIL_SENDER	tags_notify@localiza.com
+EMAIL_ADDRESS	["user1@email.com","user2@email.com","user3@email.com"]
+EMAIL_SENDER	tags_notify@email.com
 TAGS_TO_CHECK	["squad","tribo","produto"]
 ```
 
