@@ -1,8 +1,8 @@
 # Introdução
 -----
 
-Esta solução visa auto taggear recursos com e notificar sobre recursos não taggeados corretamente. Todo novo recurso criado é registrado no CloudTrail, que gera um evento no formato JSON com as informações do recurso criado, o CloudWatch EventBridge recebe este JSON e aciona 2 funções Lambdas, uma delas cria uma Tag automatica no recurso com o nome do usuário criador, a outra função checa se o recurso criado recebeu as Tags devidas e em caso negativo envia uma notificação através do SES para o email configurado informando as Tags faltantes.
-Obs. Solução funciona apenas para Instancia EC2, Bucket S3 e Instancia RDS.
+Esta solução visa auto taggear recursos com e notificar sobre recursos não taggeados corretamente. Todo novo recurso criado é registrado no CloudTrail, que gera um evento no formato JSON com as informações sobre este recurso, o CloudWatch EventBridge fica monitorando e assim que detecta a criação de um novo recurso, pega o evento do CloudTrail no formato JSON e aciona 2 funções Lambdas passando este JSON como parametro, uma das Lambdas cria uma Tag de forma automatica no recurso com a Key:"Owner" e Value:"Nome do usuário que criou". A outra função é acionada pelo mesmo evento e checa se o recurso criado recebeu as devidas Tags e em caso negativo envia uma notificação através do SES para o email configurado informando as Tags faltantes, quem criou, qual o recurso e qual a conta.
+Obs. Solução funciona apenas para Instancias EC2, Buckets S3 e Instancias RDS.
 
 ![Auto TAG Notify](./autotag.png)
 
